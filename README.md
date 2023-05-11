@@ -1,5 +1,5 @@
 
-this aplication uses express js for back end and webpack_hbs for frent end.
+this aplication uses express js for back end and webpack-hbs for front end.
 App uses TomTom map api provider, styling is in toxic.js file, easily changale through the styling feature of the tomtom website.
 app has the ability to creat markers on the map using jsgeolocation and iplocation. Geolocation asks users permession.
 App has the ability to watch for the users movements but can not be tested since the app is not live(only run on computer).
