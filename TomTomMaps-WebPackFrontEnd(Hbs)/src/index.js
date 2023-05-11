@@ -1,11 +1,13 @@
 import "./css/styles.css";
 import templateMap from './hbs/Map.hbs';
 import templateRoot from './hbs/root.hbs';
+import templateNavbar from './hbs/Navbar.hbs';
 import tt from "@tomtom-international/web-sdk-maps"
 import ipLocation from "./js/ipLocation";
 import toxicStyle from "./js/toxic";
 import jslocation from "./js/jslocation";
 import jsWatchLocation from "./js/jsWatchLocation";
+import washroomLocation from "./js/washroomLocation";
 
 
 // use root template, apply to "app" div
@@ -24,12 +26,15 @@ window.onload = () => {
 	mainEl = document.getElementById("main");
 	mainEl.innerHTML = templateMap(); // apply Map.hbs template to index.html div with id main
 
+
+
 	ipLocation().then((json) => {
 		console.log(json)
 		initMap(json);
 	});
 };
 let map;
+
 
 var markerHeight = 50, markerRadius = 10, linearOffset = 25;
 var popupOffsets = {
@@ -58,7 +63,7 @@ let initMap = (location) => { //location is json
 
 
 	//***add a marker to the map based on ip geo location, using the service defined in iplocation.js
-	let marker = new tt.Marker().setLngLat([location.long, location.lat]).addTo(map);
+	//let marker = new tt.Marker().setLngLat([location.long, location.lat]).addTo(map);
 
 
 
@@ -73,11 +78,11 @@ let initMap = (location) => { //location is json
 
 
 
-	//**** */ when the marker is clicked, the map will do the animation below
-	marker.getElement().addEventListener('click', function (e) {
-		map.easeTo({ center: marker.getLngLat(), zoom: 14, pitch: 45, bearing: 45, duration: 2000 });
-		e.stopPropagation(); //stops events in the main container(map) from firing
-	});
+	// //**** */ when the marker is clicked, the map will do the animation below
+	// marker.getElement().addEventListener('click', function (e) {
+	// 	map.easeTo({ center: marker.getLngLat(), zoom: 14, pitch: 45, bearing: 45, duration: 2000 });
+	// 	e.stopPropagation(); //stops events in the main container(map) from firing
+	// });
 
 
 
@@ -90,10 +95,26 @@ let initMap = (location) => { //location is json
 
 
 	// //****creates a marker by hand using the coordinates
-	// var marker = new tt.Marker()
-	// 	.setLngLat([-75.765, 45.455])
-	// 	.addTo(map);
 
+	washroomLocation((bathMarker) => {
+
+		for (let spot of bathMarker.features) {
+			var marker = new tt.Marker().setLngLat([spot.long, spot.lat]).addTo(map);
+		}
+		let navEl = document.getElementById("navbar"); //lab4
+		navEl.innerHTML = templateNavbar(bathMarker); //lab4
+		document.getElementById("selector").addEventListener('change', function (e) {
+
+
+			console.log(this.options[e.target.selectedIndex]);
+
+			let selected = this.options[e.target.selectedIndex];
+			let lat = selected.dataset.lat;
+			let long = selected.dataset.long;
+
+			map.easeTo({ center: { lon: long, lat: lat }, zoom: 16, pitch: 45, bearing: 45, duration: 2000 });
+		});
+	});
 
 
 	// //***creates a popup at the position of the marker

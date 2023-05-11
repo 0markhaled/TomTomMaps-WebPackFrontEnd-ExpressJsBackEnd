@@ -7,6 +7,8 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const geoRouter = require('./routes/geo');
+const washroomRouter = require('./routes/PublicWash');//lab 4
+
 
 
 
@@ -39,6 +41,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/geo', geoRouter);
+app.use('/publicwashrooms', washroomRouter);//lab 4
+
 
 
 
