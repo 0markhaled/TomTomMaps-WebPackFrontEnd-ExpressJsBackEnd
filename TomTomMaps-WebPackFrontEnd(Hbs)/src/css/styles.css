@@ -34,3 +34,46 @@ ul>li:hover {
 ul {
 	display: flex;
 }
+
+/* Apply general styling to both elements */
+#outputTextarea,
+#selector {
+	width: 100%;
+	padding: 12px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+/* Add additional styles to the <textarea> element */
+#outputTextarea {
+	height: 120px;
+	resize: vertical;
+	background-color: #f8f8f8;
+}
+
+/* Customize the <select> dropdown arrow */
+#selector {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background-color: #f8f8f8;
+
+	background-repeat: no-repeat;
+	background-position: right center;
+	padding-right: 30px;
+	cursor: pointer;
+}
+
+/* Style the option elements */
+#selector option {
+	padding: 10px;
+}
+
+/* Hover and focus styles for the <select> element */
+#selector:hover,
+#selector:focus {
+	outline: none;
+	box-shadow: 0 0 0 2px #1e90ff;
+}

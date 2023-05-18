@@ -1,5 +1,10 @@
+<textarea id="outputTextarea" rows="4" cols="50">location and hours will output here</textarea>
+
+
+
+
 <select id="selector">
     {{#each features}}
-    <option data-lat="{{lat}}" data-long="{{long}}">{{name}}</option>
+    <option data-lat="{{lat}}" data-long="{{long}}" data-mid="{{mid}}">{{name}}</option>
     {{/each}}
 </select>

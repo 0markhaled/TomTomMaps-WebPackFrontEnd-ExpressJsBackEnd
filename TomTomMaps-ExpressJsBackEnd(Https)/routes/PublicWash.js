@@ -30,7 +30,9 @@ router.get('/', async function (req, res, next) {
         let latlong = {
             lat: arrayCoords[1],
             long: arrayCoords[0],
-            name: fetchResults[i].properties.NAME
+            name: fetchResults[i].properties.NAME,
+            start: fetchResults[i].properties.SEASON_START,
+            end: fetchResults[i].properties.SEASON_END,
         };
         result.features.push(latlong);
     }
